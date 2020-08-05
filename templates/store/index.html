@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block titke %}Home
+{% endblock %}
+{% block content %}
+
+<div class="row">
+{% for product in products %}
+<div class="col-sm-3 my-3">        
+<div class="card">
+  <img src="{{ product.imageURL }}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h6 class="card-title">{{ product.name }}</h6>
+    <hr>
+    <h5 class="card-title">{{ product.price }}</h5>  
+    <button data-product="{{product.id}}" data-action="add" class="card-link btn btn-outline-success update-cart">Add to cart</button>
+    <button class="card-link btn btn-outline-warning">View</button>      
+  </div>
+</div>
+ </div>
+
+{% endfor %}
+</div>
+{% endblock content %}

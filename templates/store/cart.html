@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="cart">
+  <div class="card my-4">  
+    <div class="card-body">
+    <a href="/" class="btn btn-outline-secondary">&larr; Continue shopping</a>
+      <div class="table-responsive">
+      <table class="table my-2 mt-4">  
+      <tbody>
+          <tr>
+          <th scope="col">Items: {{order.get_cart_items}}</th>
+          <th scope="col">Total: &#8377;{{order.get_cart_total|floatformat:2}}</th>
+          {% comment %} <th scope="col"><a href="/checkout/" class="btn btn-success">Checkout</a></th>         {% endcomment %}
+          <th scope="col"><a href="/checkout/" class="btn btn-success">Checkout</a></th>
+          </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+
+  <div class="card">
+      <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Item</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+      <tr>
+        <td scope="row" ><img src="{{ item.product.imageURL }}" alt="" height="42" midth="42"></td>
+        <td>{{item.product.name}}</td>
+        <td>&#8377; {{item.product.price|floatformat:2}}</td>
+        <td>
+        {{item.quantity}}
+        
+        <button data-product="{{item.product.id}}" data-action="add" type="button" class="btn btn-light btn-sm update-cart">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5z"/>
+          <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8 5.707 5.354 8.354a.5.5 0 1 1-.708-.708l3-3z"/>
+        </svg>
+        </button>
+        <button data-product="{{item.product.id}}" data-action="remove" type="button" class="btn btn-light btn-sm update-cart">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M4.646 7.646a.5.5 0 0 1 .708 0L8 10.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"/>
+          <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5z"/>
+        </svg>
+        </button>
+        
+        </td>
+        <td>&#8377; {{item.get_total|floatformat:2}}</td>
+        <td><button data-product="{{item.product.id}}" data-action="remove_item" type="button" class="btn btn-danger btn-sm update-cart">
+        Remove</button></td>
+      </tr>
+      {% endfor %}    
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div id="empty_cart" class="collapse mt-5">
+    <div class="card text-center shadow p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        <h3 class="card-title">Your cart is empty!</h3>
+        <p class="card-text">Add items to it now.</p>
+        <a href="/" class="btn btn-primary btn-lg">Shop now</a>
+      </div>
+  </div>
+</div>
+
+<script>
+var cart_items = {{order.get_cart_items}};
+</script>
+{% endblock content %}

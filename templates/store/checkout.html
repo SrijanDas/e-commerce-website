@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}
+Checkout
+{% endblock title %}
+
+{% block content %}
+<div class="card-deck my-4">
+<div class="card">
+   <div class="card-body">
+
+      <form id="shipping_form">
+         <div class="form-row">
+            <div class="form-group col-md-6">
+               <label for="name">Name</label>
+               <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group col-md-6">
+               <label for="email">Email</label>
+               <input type="email" class="form-control" id="email">
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address">
+         </div>
+         <div class="form-row">
+            <div class="form-group col-md-6">
+               <label for="city">City</label>
+               <input type="text" class="form-control" id="city">
+            </div>
+            <div class="form-group col-md-4">
+               <label for="state">State</label>
+               <input type="text" class="form-control" id="state">
+            </div>
+            <div class="form-group col-md-2">
+               <label for="zipcode">Zip</label>
+               <input type="text" class="form-control" id="zipcode">
+            </div>
+         </div>
+         <button id="form-button" type="submit" class="btn btn-success btn-block">Continue</button>
+      </form>      
+   </div>   
+</div>
+
+
+<div class="card col-6">
+    <div class="card-body">
+        <a href="/cart/" class="btn btn-warning">&larr; Back to Cart</a>
+        <hr>
+        <h3 class="card-title">Order Summery</h3>
+         
+        <table class="table">                
+            <tbody>
+                {% for item in items %}
+                <tr>
+                <td scope="row"><img src="{{ item.product.imageURL }}" alt="" height="42" midth="42"></td>
+                <td>{{item.product.name}}</td>
+                <td>&#8377; {{item.product.price|floatformat:2}}</td>
+                <td>x {{item.quantity}}</td>                    
+                </tr>
+                {% endfor %}                   
+            </tbody>
+            </table>
+            <hr>
+            <h6 class="card-text row">Items: {{order.get_cart_items}}</h6>
+            <h4 class="card-text row">Total: &#8377; {{order.get_cart_total|floatformat:2}}</h4>
+        </div>
+    </div>
+</div>
+
+  <div class="card text-center collapse" id="payment-option">
+   <div class="card-body">  
+         <small>Paypal Option</small>
+         <div class="mt-2" id="paypal-button-container"></div>
+         {% comment %} <button type="button" class="btn btn-success" id="make-payment">Make Payment</button>  {% endcomment %}
+            
+   </div>
+  </div>
+
+<script>
+var total = "{{order.get_cart_total}}"
+</script>
+{% endblock content %}
