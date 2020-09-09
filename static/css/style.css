@@ -2,3 +2,8 @@ td, th{
     margin-bottom: 0;
     padding-bottom: 0;
 }
+#card-image{
+    object-fit: contain;
+    height: 200px;
+    margin-top: 20px;
+}
