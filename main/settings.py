@@ -25,7 +25,7 @@ SECRET_KEY = '+qq4_!zvf2rtpz!#4&%ce&uh_aa*8*6pv!#1&y80=uf-c0e9t1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['e-com-webs.herokuapp.com']
 
 
 # Application definition
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'main.urls'
